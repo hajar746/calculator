@@ -46,4 +46,6 @@ calculator.addEventListener("click", function (e) {
     displayScreen.textContent = target;
     display += target;
   }
+  if (e.target.classList.contains("key")) display += target;
+  console.log(display);
 });
