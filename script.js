@@ -30,7 +30,11 @@ const calculator = document.querySelector(".calculator");
 
 calculator.addEventListener("click", function (e) {
   // making sure the target is only for button elements
-  if (e.target.classList.contains("div")) return;
+  if (
+    e.target.classList.contains("div") ||
+    e.target.classList.contains("clear")
+  )
+    return;
   const target = e.target.textContent;
   //checking for number values and decimal
   if (!isNaN(target) || target == ".") {
@@ -47,13 +51,12 @@ calculator.addEventListener("click", function (e) {
     display += target;
   }
   if (e.target.classList.contains("key")) display += target;
-  // console.log(display);
+  console.log(display, "display");
 });
 
 // GET FIRST NUMBER (from display)
 const getNum1 = function () {
   num1 = display.replace(/[^0-9.].*/, "");
-  console.log(num1);
   return num1;
 };
 
@@ -78,5 +81,8 @@ equals.addEventListener("click", () => {
 });
 
 // CLEAR DISPLAYS SCREEN
-// const clear = document.querySelector(".clear");
-// clear.addEventListener("click", function () {});
+const clear = document.querySelector(".clear");
+clear.addEventListener("click", function () {
+  displayScreen.replaceChildren();
+  display = "";
+});
