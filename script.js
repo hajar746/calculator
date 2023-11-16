@@ -8,7 +8,12 @@ let operator;
 const add = (a, b) => +a + +b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const divide = (a, b) => {
+  if (b == 0) {
+    return "dont";
+  }
+  return a / b;
+};
 const power = (a, b) => a ** b;
 const percent = (a) => a / 100;
 
@@ -20,11 +25,10 @@ function operate(operator, a, b) {
   if (operator === "×") return multiply(a, b);
   if (operator === "÷") return divide(a, b);
   if (operator === "xⁿ") return power(a, b);
-  if (operator === "%") return percent(a);
 }
 
 // GET VALUE OF DISPLAY SCREEN
-let display = "";
+let display = ""; // every thing that user clicks on
 let displayScreen = document.querySelector(".display");
 const calculator = document.querySelector(".calculator");
 
@@ -50,13 +54,15 @@ calculator.addEventListener("click", function (e) {
     displayScreen.textContent = target;
     display += target;
   }
-  if (e.target.classList.contains("key")) display += target;
-  console.log(display, "display");
+  if (target == "%") {
+    percentage();
+  }
+  if (target == "-") return;
 });
 
 // GET FIRST NUMBER (from display)
 const getNum1 = function () {
-  num1 = display.replace(/[^0-9.].*/, "");
+  num1 = display.replace(/[^0-9.].*/, ""); //returns all numbers before operator starts
   return num1;
 };
 
@@ -73,11 +79,25 @@ const getOperator = function () {
   return operator;
 };
 
-// RUN OPERATION
+// FUNCTION TO RUN IF THE OPERATOR IS %
+const percentage = function () {
+  const a = getNum1();
+  displayScreen.textContent = percent(a);
+};
+
+// RUN OPERATION AND DISPLAY
 const equals = document.querySelector(".equals");
 equals.addEventListener("click", () => {
   let res = operate(getOperator(), getNum1(), getNum2());
-  displayScreen.textContent = res;
+  // dont divide by 0
+  // if (res === NaN || res === Infinity || res === -Infinity) {
+  //   displayScreen.textContent = "Dont do that";
+  //   return;
+  // }
+  displayScreen.textContent = Math.round(res * 10) / 10;
+  display = "";
+  num1 = Math.round(res * 10) / 10; // setting the num1 to be the result of operation
+  display += num1;
 });
 
 // CLEAR DISPLAYS SCREEN
