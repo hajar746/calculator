@@ -8,7 +8,7 @@
 body {
   display: flex;
   justify-content: center;
-  background-color: #f8edeb;
+  background-color: #f0c2bb;
 }
 
 .calculator {
@@ -20,7 +20,7 @@ body {
   margin: 1.5rem;
   background-color: #f9d7d1;
   border-radius: 20px;
-  box-shadow: 15px 9px 5px #d6c1be;
+  box-shadow: 15px 9px 8px #7e6e6c;
   border: 0.2px solid #f1d1d1;
 }
 

@@ -19,13 +19,16 @@ function operate(operator, a, b) {
   if (operator === "–") return subtract(a, b);
   if (operator === "×") return multiply(a, b);
   if (operator === "÷") return divide(a, b);
-  if (operator === "xⁿ") return power(a, b);
+  if (operator === "∧") return power(getNum1(), getNum2());
 }
 
 // FUNCTION TO RUN IF THE OPERATOR IS %
 const percentage = function () {
   const a = getNum1();
   displayScreen.textContent = percent(a);
+  display = "";
+  num1 = percent(a);
+  display += num1;
 };
 
 // GET VALUE OF DISPLAY SCREEN
@@ -55,9 +58,7 @@ calculator.addEventListener("click", function (e) {
     displayScreen.textContent = target;
     display += target;
   }
-  if (target == "%") {
-    percentage();
-  }
+  if (target == "%") percentage();
   if (target == "=") return;
 });
 
@@ -89,9 +90,9 @@ equals.addEventListener("click", () => {
     displayScreen.textContent = "Dont do that";
     return;
   }
-  displayScreen.textContent = Math.round(res * 10) / 10;
+  displayScreen.textContent = Math.round(res * 100) / 100;
   display = "";
-  num1 = Math.round(res * 10) / 10; // setting the num1 to be the result of operation
+  num1 = Math.round(res * 100) / 100; // setting the num1 to be the result of operation
   display += num1;
 });
 
