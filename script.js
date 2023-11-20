@@ -3,6 +3,7 @@
 let num1;
 let num2;
 let operator;
+let result;
 
 // MATH OPERATION FUNCTIONS
 const add = (a, b) => +a + +b;
@@ -26,8 +27,16 @@ function operate(operator, a, b) {
 const percentage = function () {
   const a = getNum1();
   displayScreen.textContent = percent(a);
-  display = "";
   num1 = percent(a);
+  display = "";
+  display += num1;
+};
+
+// FUNCTION TO CALCULATE NUM1 AND RESET VALUE OF DISPLAY TO NUM1
+const getResult = () => {
+  result = Math.round(operate(getOperator(), getNum1(), getNum2()) * 100) / 100;
+  num1 = result;
+  display = "";
   display += num1;
 };
 
@@ -54,7 +63,11 @@ calculator.addEventListener("click", function (e) {
     display += target;
   }
   //checking for operator values
-  if (e.target.classList.contains("operator")) {
+  // evaluating multiple operations
+  if (e.target.classList.contains("operator") && /[+∧×÷–]/.test(display))
+    getResult();
+  // evaluating first operation
+  if (e.target.classList.contains("operator") && !/[+∧×÷–]/.test(display)) {
     displayScreen.textContent = target;
     display += target;
   }
@@ -84,19 +97,16 @@ const getOperator = function () {
 // RUN OPERATION AND DISPLAY IT
 const equals = document.querySelector(".equals");
 equals.addEventListener("click", () => {
-  let res = operate(getOperator(), getNum1(), getNum2());
+  getResult();
   // dont divide by 0
-  if (res === NaN || res === Infinity || res === -Infinity) {
+  if (result === NaN || result === Infinity || result === -Infinity) {
     displayScreen.textContent = "Dont do that";
     return;
   }
-  displayScreen.textContent = Math.round(res * 100) / 100;
-  display = "";
-  num1 = Math.round(res * 100) / 100; // setting the num1 to be the result of operation
-  display += num1;
+  displayScreen.textContent = result;
 });
 
-// CLEAR DISPLAYS SCREEN
+// CLEAR DISPLAY SCREEN
 const clear = document.querySelector(".clear");
 clear.addEventListener("click", function () {
   displayScreen.replaceChildren();
