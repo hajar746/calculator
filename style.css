@@ -8,14 +8,10 @@
 body {
   display: flex;
   justify-content: center;
-  background-color: #efe6e4;
+  background-color: #f3d021;
 }
 
 .calculator {
-  position: absolute;
-  top: 4%;
-  left: 35%;
-  transform: translate(-30%, 50%);
   transition: 0.5s;
   display: flex;
   flex-direction: column;
@@ -23,34 +19,10 @@ body {
   height: auto;
   padding: 1rem;
   margin: 1.5rem;
-  background-color: #f9d7d1;
-  transform: skewY(-6deg);
+  background-color: #333;
   box-shadow: -10px 5px 30px rgba(0, 0, 0, 0.5);
-  border: 1px solid #f2b1b1;
-}
-
-.calculator:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -25px;
-  width: 25px;
-  height: 100%;
-  background-color: #ecb1a8;
-  transform-origin: right bottom;
-  transform: skewY(45deg);
-}
-
-.calculator:after {
-  content: "";
-  position: absolute;
-  top: -25px;
-  left: 0;
-  width: 100%;
-  height: 25px;
-  background-color: #f1c0b9;
-  transform-origin: bottom left;
-  transform: skewX(45deg);
+  border: 1px solid #111;
+  border-radius: 10px;
 }
 
 .display {
@@ -78,28 +50,32 @@ body {
 
 button {
   font-size: 2rem;
+  font-weight: 600;
   padding: 0.2rem;
-  border: none;
+  border: 2px solid #222;
   width: 70px;
   height: 65px;
-  border-radius: 15px;
-  background-color: #f8edeb;
-  box-shadow: -4px -4px #f7c6bc;
+  border-radius: 6px;
+  color: #a09f9f;
+  background: linear-gradient(#555353, #363535, #303030);
+  box-shadow: inset 0 5px 1px rgba(0, 0, 0, 0.35), 0 5px 5px rgba(0, 0, 0, 0.5),
+    0 15px 25px rgba(0, 0, 0, 0.35);
   text-align: center;
   cursor: pointer;
 }
 
-button:hover {
-  box-shadow: none;
-  transform: translateY(0.3rem);
+button:active {
+  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.35),
+    inset 0 5px 5px rgba(0, 0, 0, 0.5), inset 0 15px 25px rgba(0, 0, 0, 0.35);
+  color: #fff;
+  text-shadow: 0 0 5px #f3cd21, 0 0 8px #f3d021;
 }
+
+/* button:hover {
+  box-shadow: none;
+  transform: translateY(-0.3rem);
+} */
 
 .equals {
   flex-grow: 2;
-}
-
-.clear,
-.equals {
-  background-color: #f4b7ad;
-  box-shadow: -4px -4px #e3a096;
 }
