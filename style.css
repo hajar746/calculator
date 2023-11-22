@@ -25,16 +25,27 @@ body {
   border-radius: 10px;
 }
 
-.display {
+.display-screen {
+  display: flex;
+  flex-direction: column;
   width: 350px;
-  height: 70px;
-  font-size: 2.5rem;
+  height: 80px;
   text-align: center;
+  font-size: 2.5rem;
   border: 2px solid rgba(85, 75, 75, 0.4);
   background-color: #898274;
   border-radius: 15px;
-  padding-top: 1rem;
   text-align: end;
+}
+
+.dislay {
+  padding: 1rem;
+}
+
+.operation {
+  font-size: 1.2rem;
+  padding-right: 1rem;
+  align-self: flex-start;
 }
 
 .buttons {
@@ -70,11 +81,6 @@ button:active {
   color: #fff;
   text-shadow: 0 0 5px #f3cd21, 0 0 8px #f3d021;
 }
-
-/* button:hover {
-  box-shadow: none;
-  transform: translateY(-0.3rem);
-} */
 
 .equals {
   flex-grow: 2;

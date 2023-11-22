@@ -43,6 +43,7 @@ const getResult = () => {
 // GET VALUE OF DISPLAY SCREEN
 let display = ""; // every thing that user clicks on
 let displayScreen = document.querySelector(".display");
+let displayOper = document.querySelector(".operation");
 const calculator = document.querySelector(".calculator");
 
 calculator.addEventListener("click", function (e) {
@@ -61,6 +62,7 @@ calculator.addEventListener("click", function (e) {
     }
     displayScreen.textContent += target;
     display += target;
+    displayOper.textContent += target;
   }
   //checking for operator values
   // evaluating multiple operations
@@ -70,10 +72,10 @@ calculator.addEventListener("click", function (e) {
   if (e.target.classList.contains("operator") && !/[+∧×÷–]/.test(display)) {
     displayScreen.textContent = target;
     display += target;
+    displayOper.textContent += ` ${target} `;
   }
   if (target == "%") percentage();
   if (target == "=") return;
-  console.log(display);
 });
 
 // GET FIRST NUMBER (from display string)
@@ -111,11 +113,14 @@ equals.addEventListener("click", () => {
     return;
   }
   displayScreen.textContent = result;
+  displayOper.textContent += " = ";
+  displayOper.textContent += result;
 });
 
 // CLEAR DISPLAY SCREEN
 const clear = document.querySelector(".clear");
 clear.addEventListener("click", function () {
   displayScreen.replaceChildren();
+  displayOper.replaceChildren();
   display = "";
 });
