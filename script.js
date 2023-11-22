@@ -73,12 +73,19 @@ calculator.addEventListener("click", function (e) {
   }
   if (target == "%") percentage();
   if (target == "=") return;
+  console.log(display);
 });
 
 // GET FIRST NUMBER (from display string)
 const getNum1 = function () {
-  num1 = display.replace(/[^0-9.].*/, ""); //returns all numbers before operator starts
-  return num1;
+  // for negative numbers
+  if (display[0] === "-") {
+    num1 = display.slice(1, display.indexOf(",") - 1);
+    return -num1;
+  } else {
+    num1 = display.replace(/[^0-9.].*/, ""); //returns all numbers before operator starts
+    return num1;
+  }
 };
 
 // GET SECOND NUMBER (from display)
