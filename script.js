@@ -113,8 +113,13 @@ equals.addEventListener("click", () => {
     return;
   }
   displayScreen.textContent = result;
-  displayOper.textContent += " = ";
-  displayOper.textContent += result;
+  // clearing operation on display screen
+  if (displayOper.textContent.length > 28) {
+    displayOper.textContent = "";
+    displayOper.textContent += ` = ${result}`;
+  } else {
+    displayOper.textContent += ` = ${result}`;
+  }
 });
 
 // CLEAR DISPLAY SCREEN
