@@ -38,6 +38,7 @@ const getResult = () => {
   num1 = result;
   display = "";
   display += num1;
+  btnDecimal.disabled = false;
 };
 
 // GET VALUE OF DISPLAY SCREEN
@@ -45,6 +46,7 @@ let display = ""; // every thing that user clicks on
 let displayScreen = document.querySelector(".display");
 let displayOper = document.querySelector(".operation");
 const calculator = document.querySelector(".calculator");
+const btnDecimal = document.querySelector(".decimal");
 
 calculator.addEventListener("click", function (e) {
   // making sure the target is only for button elements
@@ -60,6 +62,9 @@ calculator.addEventListener("click", function (e) {
       display += ",";
       displayScreen.textContent = " "; // clearing the screen only if the previous value was an operator
     }
+    if (target == ".") {
+      btnDecimal.disabled = true;
+    }
     displayScreen.textContent += target;
     display += target;
     displayOper.textContent += target;
@@ -73,6 +78,7 @@ calculator.addEventListener("click", function (e) {
     displayScreen.textContent = target;
     display += target;
     displayOper.textContent += ` ${target} `;
+    btnDecimal.disabled = false;
   }
   if (target == "%") percentage();
   if (target == "=") return;
