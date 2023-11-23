@@ -32,21 +32,13 @@ const percentage = function () {
   display += num1;
 };
 
-// FUNCTION TO CALCULATE NUM1 AND RESET VALUE OF DISPLAY TO NUM1
-const getResult = () => {
-  result = Math.round(operate(getOperator(), getNum1(), getNum2()) * 100) / 100;
-  num1 = result;
-  display = "";
-  display += num1;
-  btnDecimal.disabled = false;
-};
-
 // GET VALUE OF DISPLAY SCREEN
 let display = ""; // every thing that user clicks on
 let displayScreen = document.querySelector(".display");
 let displayOper = document.querySelector(".operation");
 const calculator = document.querySelector(".calculator");
 const btnDecimal = document.querySelector(".decimal");
+const btnDelete = document.querySelector(".backspace");
 
 calculator.addEventListener("click", function (e) {
   // making sure the target is only for button elements
@@ -60,10 +52,13 @@ calculator.addEventListener("click", function (e) {
   if (!isNaN(target) || target == ".") {
     if (isNaN(displayScreen.textContent) && displayScreen.textContent != ".") {
       display += ",";
-      displayScreen.textContent = " "; // clearing the screen only if the previous value was an operator
+      displayScreen.textContent = ""; // clearing the screen only if the previous value was an operator
     }
-    if (target == ".") {
+    // disabling decimal btn if you already pressed it
+    if (display.includes(".")) {
       btnDecimal.disabled = true;
+    } else {
+      btnDecimal.disabled = false;
     }
     displayScreen.textContent += target;
     display += target;
@@ -82,6 +77,13 @@ calculator.addEventListener("click", function (e) {
   }
   if (target == "%") percentage();
   if (target == "=") return;
+});
+
+// DELETE LAST CHARACTER
+btnDelete.addEventListener("click", function () {
+  display = display.slice(0, -1);
+  displayOper.textContent = displayOper.textContent.slice(0, -1);
+  displayScreen.textContent = displayScreen.textContent.slice(0, -1);
 });
 
 // GET FIRST NUMBER (from display string)
@@ -107,6 +109,15 @@ const getNum2 = function () {
 const getOperator = function () {
   operator = display.slice(display.indexOf(",") - 1, display.indexOf(","));
   return operator;
+};
+
+// FUNCTION TO CALCULATE NUM1 AND RESET VALUE OF DISPLAY TO NUM1 WHEN EVALUATING MANY OPERATIONS
+const getResult = () => {
+  result = Math.round(operate(getOperator(), getNum1(), getNum2()) * 100) / 100;
+  num1 = result;
+  display = "";
+  display += num1;
+  btnDecimal.disabled = false;
 };
 
 // RUN OPERATION AND DISPLAY IT

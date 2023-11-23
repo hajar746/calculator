@@ -82,6 +82,9 @@ button:active {
   text-shadow: 0 0 5px #f3bb21, 0 0 8px #f3bb21;
 }
 
-.equals {
-  flex-grow: 2;
+.backspace img {
+  height: 2.2rem;
+  width: 2rem;
+  text-align: center;
+  margin-top: 0.7rem;
 }
