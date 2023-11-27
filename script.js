@@ -55,24 +55,25 @@ calculator.addEventListener("click", function (e) {
       displayScreen.textContent = ""; // clearing the screen only if the previous value was an operator
     }
     // disabling decimal btn if you already pressed it
-    if (display.includes(".")) {
-      btnDecimal.disabled = true;
-    } else {
-      btnDecimal.disabled = false;
-    }
+    if (target == ".") btnDecimal.disabled = true;
     displayScreen.textContent += target;
     display += target;
     displayOper.textContent += target;
   }
   //checking for operator values
   // evaluating multiple operations
-  if (e.target.classList.contains("operator") && /[+∧×÷–]/.test(display))
+  if (
+    e.target.classList.contains("operator") &&
+    /[+∧×÷–]/.test(display) &&
+    !isNaN(display.slice(-1)) // not evaluating if operator has already been pressed
+  ) {
     getResult();
+  }
   // evaluating first operation
   if (e.target.classList.contains("operator") && !/[+∧×÷–]/.test(display)) {
     displayScreen.textContent = target;
     display += target;
-    displayOper.textContent += ` ${target} `;
+    displayOper.textContent += target;
     btnDecimal.disabled = false;
   }
   if (target == "%") percentage();
@@ -133,9 +134,9 @@ equals.addEventListener("click", () => {
   // clearing operation on display screen
   if (displayOper.textContent.length > 28) {
     displayOper.textContent = "";
-    displayOper.textContent += ` = ${result}`;
+    displayOper.textContent += `=${result}`;
   } else {
-    displayOper.textContent += ` = ${result}`;
+    displayOper.textContent += `=${result}`;
   }
 });
 
